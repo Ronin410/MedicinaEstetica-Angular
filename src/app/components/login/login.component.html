@@ -1,0 +1,11 @@
+<section class="form-login">
+    <h5>Iniciar Sesion</h5>
+    <input class="controls" id="correo" type="text" name="usuario" value="" placeholder="Usuario">
+    <input class="controls" id="contrasena" type="password" name="contrasena" value="" placeholder="Contraseña">
+    <button class="buttons" (click)="login()">Ingresar</button>
+    <p><a href="/#">¿Olvidastes tu Contraseña?</a></p>
+    <div *ngIf="!isValidCredentials">
+        Credenciales inválidas
+    </div>
+
+</section>

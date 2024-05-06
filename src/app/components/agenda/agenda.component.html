@@ -1,0 +1,151 @@
+<main class="bg-indigo-50/60 w-full py-10 px-3 sm:px-10">
+
+    <!-- Nav -->
+    <nav class="text-lg flex items-center justify-between content-center ">
+        <div class=" font-semibold text-xl text-gray-800 flex space-x-4 items-center">
+            <a href="#">
+                <span class="md:hidden">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h7"></path>
+                    </svg>
+
+                </span>
+            </a>
+            <span>Agenda</span>
+        </div>
+
+        <div class="flex space-x-5 md:space-x-10 text-gray-500 items-center content-center text-base ">
+
+
+            <a class href="agendar">
+                <img class="rounded-full w-10 h-10 border-2 border-indigo-200 hover:border-indigo-300"
+                    src="https://thumbs.dreamstime.com/b/perfil-de-usuario-o-icono-inicio-sesi%C3%B3n-avatar-mi-cuenta-con-mujer-s%C3%ADmbolo-sonrisa-cara-femenina-vector-plano-miembro-persona-186506698.jpg"
+                    alt srcset>
+            </a>
+        </div>
+    </nav> <!-- /Nav -->
+    <!-- Filters Section -->
+    <section>
+        <div
+            class="bg-rose-100/70 mt-12  rounded-xl px-5 sm:px-10  pt-8 pb-4 relative xl:bg-[url('https://previews.123rf.com/images/kojaif/kojaif2204/kojaif220400205/184549274-conjunto-de-iconos-de-perfil-de-usuario-avatar-inicio-de-sesi%C3%B3n-s%C3%ADmbolo-de-c%C3%ADrculo-de-cuenta-para.jpg')] bg-no-repeat bg-right bg-contain ">
+            <div class="text-rose-400 font-semibold text-lg">Buscar</div>
+
+
+            <div class="mt-6 grid grid-cols-1 xs:grid-cols-2 gap-y-6  gap-x-6 md:flex md:space-x-6 md:gap-x-0 ">
+                <!-- <div class="mt-6 grid grid-cols-4 max-w-max gap-x-6"> -->
+
+                <!-- <div class="flex flex-col w-40 text-gray-700 text-sm space-y-2">
+                        <label for="start-date">Begin Date</label>
+                        <input id="startdate" type="date" value="2019-11-01"
+                            class="bg-indigo-800/80 text-white  px-4 py-3 rounded-lg ">
+                    </div> -->
+
+
+                <div class="flex flex-col  md:w-40  text-gray-600  text-sm space-y-2 font-semibold">
+                    <label>Id cita</label>
+
+                    <div class="inline-flex relative">
+                        <input
+                            class="bg-indigo-800/80 text-white tracking-wider pl-4 pr-10 py-3 rounded-lg appearance-none w-full outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 "
+                            id="IdBuscar" name="IdBuscar" type="text" value="" placeholder="Ej:23"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="10">
+
+
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:w-40   text-gray-600 text-sm space-y-2 font-semibold">
+                    <label for="FechaBuscar">Fecha</label>
+
+                    <div class="inline-flex relative">
+
+                        <input
+                            class="bg-indigo-800/50 text-white tracking-wider pl-4 pr-5 py-3 rounded-lg appearance-none w-full outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300"
+                            id="FechaBuscar" name="FechaBuscar" type="date" value="" placeholder="Fecha">
+
+                        <span class="absolute top-0 right-0 m-3 pointer-events-none text-white">
+
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="flex flex-col md:w-100    text-gray-600 text-sm space-y-2 font-semibold">
+                    <label>Cliente</label>
+                    <div class="inline-flex relative">
+
+
+                        <input
+                            class="bg-rose-200 text-white  px-4 py-3 rounded-lg appearance-none w-full outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300"
+                            id="ClienteBuscar" name="clientBuscar" type="text" value="" placeholder="Ej:Maria"
+                            oninput="this.value = this.value.replace(/[^a-zA-Z ]/,'')" maxlength="50">
+
+                    </div>
+                </div>
+
+
+
+                <div class="flex space-x-5 md:space-x-10 text-gray-500 items-center content-center text-base ">
+                    <div
+                        class="bg-blue-600/70  text-white  px-4 py-0 rounded-lg appearance-none w-full outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 hidden xs:block">
+                        <button class="hidden sm:inline-block" (click)="buscar()">Buscar</button>
+                    </div>
+                </div>
+                <div class="flex space-x-5 md:space-x-10 text-gray-500 items-center content-center text-base ">
+                    <div
+                        class="bg-blue-600/70  text-white  px-4 py-0 rounded-lg appearance-none w-full outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 hidden xs:block">
+                        <button class="hidden sm:inline-block" (click)="Limpiar()">Limpiar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section> <!-- /Filters Section -->
+
+
+
+
+
+
+
+
+    <!-- Invoice List Table -->
+    <section class="">
+        <!-- Table Header -->
+        <div
+            class="invoice-table-row invoice-table-header bg-white mt-10 rounded-xl px-10  py-4 flex items-center gap-x-3 text-sm font-semibold  text-gray-600">
+            <div class="text-left">Id</div>
+            <div class="text-left">Cliente</div>
+            <div class="text-left">Doctora</div>
+            <div class="text-center ">Fecha</div>
+            <div class="text-center ">Hora</div>
+            <div class="flex-1  text-center">Status</div>
+        </div><!-- /Table Header -->
+
+
+        <!-- Table Body -->
+        <div class="bg-white mt-5 rounded-xl text-sm  text-gray-500 divide-y divide-indigo-50 overflow-x-auto  shadow"
+            style="overflow-y: scroll; height: 500px;">
+
+            <div class="invoice-table-row flex items-center gap-x-3 px-10 py-4" *ngFor="let cita of citas">
+                <div class="text-left ">{{ cita.idCita }}</div>
+                <div class="text-left">{{ cita.cliente }}</div>
+                <div class="text-left">{{ cita.doctora }}</div>
+                <div class="text-center">{{ cita.fechaSola }}</div>
+                <div class="text-center">{{ cita.hora }}</div>
+                <div class="text-center ">
+                    <span class="px-4 py-1 rounded-lg bg-rose-400  text-white" *ngIf="cita.status === 0">Pend</span>
+                    <span class="px-4 py-1 rounded-lg bg-rose-400  text-white" *ngIf="cita.status === 1">Fin</span>
+                </div>
+            </div>
+
+        </div><!-- /Table Body -->
+
+    </section>
+    <!-- /Invoice List Table -->
+
+</main>

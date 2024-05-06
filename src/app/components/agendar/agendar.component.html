@@ -1,0 +1,192 @@
+<section>
+
+    <div
+        class="bg-rose-100/70 mt-12  rounded-xl px-5 sm:px-10  pt-8 pb-4 relative xl:bg-[url('https://previews.123rf.com/images/kojaif/kojaif2204/kojaif220400205/184549274-conjunto-de-iconos-de-perfil-de-usuario-avatar-inicio-de-sesi%C3%B3n-s%C3%ADmbolo-de-c%C3%ADrculo-de-cuenta-para.jpg')] bg-no-repeat bg-right bg-contain ">
+        <div id="cc" style="display:flex;flex-wrap: nowrap;align-items: center;justify-content: space-between;">
+            <div class="text-rose-400 font-semibold text-lg">Agendar</div>
+            <div class="inline-flex relative">
+                <label style="width: 80px; padding-top: 12px;">Total: $ </label>
+                <input
+                    class="bg-indigo-800/80 text-white tracking-wider pl-4 pr-10 py-3 rounded-lg appearance-none w-full outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 "
+                    id="Total" name="total" type="text" placeholder="0" disabled>
+
+
+            </div>
+        </div>
+        <div class="mt-6 grid grid-cols-1 xs:grid-cols-2 gap-y-6  gap-x-6 md:flex md:space-x-6 md:gap-x-0 ">
+            <!-- <div class="mt-6 grid grid-cols-4 max-w-max gap-x-6"> -->
+
+            <!-- <div class="flex flex-col w-40 text-gray-700 text-sm space-y-2">
+                    <label for="start-date">Begin Date</label>
+                    <input id="startdate" type="date" value="2019-11-01"
+                        class="bg-indigo-800/80 text-white  px-4 py-3 rounded-lg ">
+                </div> -->
+
+
+            <div class="flex flex-col  md:w-50  text-gray-600  text-sm space-y-2 font-semibold">
+                <label>Id cita</label>
+
+                <div class="inline-flex relative">
+                    <input
+                        class="bg-indigo-800/80 text-white tracking-wider pl-4 pr-10 py-3 rounded-lg appearance-none w-full outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 "
+                        id="Id" name="Id" type="text" value="" placeholder="Ej:23"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        maxlength="10" disabled>
+
+
+                </div>
+            </div>
+
+            <div class="flex flex-col  md:w-50  text-gray-600  text-sm space-y-2 font-semibold">
+                <label>Cliente</label>
+
+                <div class="inline-flex relative">
+                    <input
+                        class="bg-indigo-800/80 text-white tracking-wider pl-4 pr-10 py-3 rounded-lg appearance-none w-full outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 "
+                        id="Cliente" name="Cliente" type="text" value="" placeholder="Ej:Maria"
+                        oninput="this.value = this.value.replace(/[^a-zA-Z ]/,'')" maxlength="50">
+
+
+                </div>
+            </div>
+
+
+            <div class="flex flex-col  md:w-50  text-gray-600  text-sm space-y-2 font-semibold">
+                <label>Doctora</label>
+
+                <div class="inline-flex relative">
+                    <input
+                        class="bg-indigo-800/80 text-white tracking-wider pl-4 pr-10 py-3 rounded-lg appearance-none w-full outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 "
+                        id="Doctora" name="Doctora" type="text" value="" placeholder="Ej:Maria"
+                        oninput="this.value = this.value.replace(/[^a-zA-Z ]/,'')" maxlength="50">
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 xs:grid-cols-2 gap-y-6  gap-x-6 md:flex md:space-x-6 md:gap-x-0 ">
+
+
+            <div class="flex flex-col md:w-50   text-gray-600 text-sm space-y-2 font-semibold">
+                <label for="Fecha">Fecha</label>
+
+                <div class="inline-flex relative">
+
+                    <input
+                        class="bg-indigo-800/50 text-white tracking-wider pl-4 pr-5 py-3 rounded-lg appearance-none w-full outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300"
+                        id="Fecha" name="Fecha" type="date" value="" placeholder="Fecha">
+
+                    <span class="absolute top-0 right-0 m-3 pointer-events-none text-white">
+
+                    </span>
+                </div>
+            </div>
+
+            <div class="flex flex-col  md:w-50  text-gray-600  text-sm space-y-2 font-semibold">
+                <label>Hora - Min</label>
+                <div class="inline-flex relative">
+                    <input
+                        class="bg-indigo-800/80 text-white tracking-wider pl-4 pr-10 py-3 rounded-lg appearance-none w-full outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 "
+                        id="Hora" name="Hora" type="text" value="" placeholder="00"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        maxlength="2" (input)="ValidarHora()">
+
+                    <input
+                        class="bg-indigo-800/80 text-white tracking-wider pl-4 pr-10 py-3 rounded-lg appearance-none w-full outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 "
+                        id="Minutos" name="Minutos" type="text" value="" placeholder="00"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        maxlength="2" (input)="ValidarMinutos()">
+
+
+                </div>
+            </div>
+
+            <div class="flex space-x-5 md:space-x-10 text-gray-500 items-center content-center text-base ">
+                <div
+                    class="bg-blue-600/70  text-white  px-4 py-0 rounded-lg appearance-none w-full outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 hidden xs:block">
+                    <button class="hidden sm:inline-block" (click)="AgregarCita()">Agendar</button>
+                </div>
+            </div>
+            <div class="flex space-x-5 md:space-x-10 text-gray-500 items-center content-center text-base ">
+                <div
+                    class="bg-blue-600/70  text-white  px-4 py-0 rounded-lg appearance-none w-full outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 hidden xs:block">
+                    <button class="hidden sm:inline-block" (click)="LimpiarCampos()">Limpiar</button>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="guardado">
+            Cita guardada
+        </div>
+        <div *ngIf="vacios">
+            Faltan campos por llenar
+        </div>
+        <div *ngIf="noGuardado">
+            No se pudo guardar la cita
+        </div>
+
+    </div>
+
+</section> <!-- /Filters Section -->
+
+
+
+<section>
+    <div
+        class="bg-rose-100/70 mt-12  rounded-xl px-5 sm:px-10  pt-8 pb-4 relative xl:bg-[url('https://previews.123rf.com/images/kojaif/kojaif2204/kojaif220400205/184549274-conjunto-de-iconos-de-perfil-de-usuario-avatar-inicio-de-sesi%C3%B3n-s%C3%ADmbolo-de-c%C3%ADrculo-de-cuenta-para.jpg')] bg-no-repeat bg-right bg-contain ">
+        <div class="text-rose-400 font-semibold text-lg">Detalle</div>
+
+        <section style="display:flex;flex-wrap: nowrap;align-items: center;justify-content: space-around;">
+            <!-- Table Header -->
+            <div class="invoice-table-row invoice-table-header bg-white mt-10 rounded-xl px-10  py-4  items-center gap-x-3 text-sm font-semibold  text-gray-600"
+                style="width: 40%;">
+                <div class="text-center">Inventario</div>
+            </div><!-- /Table Header -->
+
+            <div class="invoice-table-row invoice-table-header bg-white mt-10 rounded-xl px-10  py-4  items-center gap-x-3 text-sm font-semibold  text-gray-600"
+                style="width: 40%;">
+                <div class="text-center">Carrito</div>
+            </div><!-- /Table Header -->
+
+
+        </section>
+
+        <section style="display:flex;flex-wrap: nowrap;align-items: center;justify-content: space-around;">
+
+
+            <!-- Table Body -->
+            <div class="bg-white mt-5 rounded-xl text-sm  text-gray-500 divide-y divide-indigo-50 overflow-x-auto  shadow"
+                style="overflow-y: scroll; height: 450px; width: 45%;">
+
+                <div class="invoice-table-row flex items-center gap-x-3 px-10 py-4"
+                    *ngFor="let inv of inventario ; let i = index">
+                    <button type="submit" (click)="AgregarCarrito(inventario[i].idProc)">+</button>
+                    <div class="text-left">{{inv.nomProc}}</div>
+                    <div class="text-left">${{inv.precio}}</div>
+                </div>
+
+            </div><!-- /Table Body -->
+
+
+            <!-- Table Body -->
+            <div class="bg-white mt-5 rounded-xl text-sm  text-gray-500 divide-y divide-indigo-50 overflow-x-auto  shadow"
+                style="overflow-y: scroll; height: 450px; width: 45%;">
+
+
+                <div class="invoice-table-row flex items-center gap-x-3 px-10 py-4"
+                    *ngFor="let car of carrito ; let i = index">
+                    <button type="submit" (click)="EliminarCarrito(i)">-</button>
+                    <div class="text-left ">{{car.nomProc}}</div>
+                    <div class="text-left ">{{car.precio}}</div>
+                </div>
+            </div>
+
+
+
+        </section>
+
+
+    </div>
+
+</section> <!-- /Filters Section -->
