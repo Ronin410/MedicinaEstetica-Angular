@@ -6,7 +6,6 @@ import { InventarioService } from '../../services/inventario.service';
 import { Router } from '@angular/router';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { EmergentMessageComponent } from "../emergent-message/emergent-message.component";
-
 @Component({
   selector: 'app-agendar',
   standalone: true,
@@ -33,7 +32,8 @@ export class AgendarComponent implements OnInit {
   carrito: any[] = [];
   totalPagar: any;
   idUltimo: any;
-
+  fechaiso: any;
+  nuevasHoras: any;
   constructor(@Inject(Router) private router: Router, private agendarService: AgendarService, private inventarioService: InventarioService) {
     this.ConsultarInventario();
 
@@ -101,12 +101,22 @@ export class AgendarComponent implements OnInit {
     this.formattedDate = "";
     if (this.fecha.value != "") {
       this.formattedDate = new Date(this.fecha.value);
+      const currentDay = this.formattedDate.getDate();
+      const newDay = currentDay + 1;
+      this.formattedDate.setDate(newDay);
       this.formattedDate.setHours(this.hora.value);
       this.formattedDate.setMinutes(this.minutos.value);
-      this.formattedDate = new Date(this.formattedDate).toISOString();
-      this.formattedDate = this.formattedDate.slice(0, -1) + "-07:00"; // Add time zone offset
 
+      const horasActuales = this.formattedDate.getHours();
+      this.nuevasHoras = horasActuales - 7;
+      if (this.nuevasHoras < 0) {
+        this.formattedDate.setDate(this.formattedDate.getDate() - 1);
+        this.nuevasHoras += 24;
+      }
+      this.formattedDate.setHours(this.nuevasHoras);
+      this.formattedDate = this.formattedDate.toISOString();
 
+      console.log(this.formattedDate);
     }
   }
 
@@ -162,7 +172,7 @@ export class AgendarComponent implements OnInit {
     this.minutos = document.getElementById("Minutos") as HTMLInputElement;
     this.doctora = document.getElementById("Doctora") as HTMLInputElement;
     this.totalPagar = document.getElementById("Total") as HTMLInputElement;
-    console.log("");
+
   }
 
   ConsultarInventario() {
