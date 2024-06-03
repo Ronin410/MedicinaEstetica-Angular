@@ -17,11 +17,31 @@ export class AuthService {
 
   isAuth() {
     this.token = localStorage.getItem('tokenSesion');
+
     if (this.token == null || this.token == "") {
       return false;
-
     } else {
-      return true;
+
+      return this.validarToken().subscribe(
+        (response) => {
+          console.log = response;
+          if (response.meta.statusCode == 200) {
+            if (response.data != true) {
+              localStorage.setItem("tokenSesion", "");
+              return false;
+            }
+
+            return true;
+          } else {
+            console.error('Error al validar el token:');
+            return false;
+          }
+        },
+        (error) => {
+          console.error('Error al validar el token:', error);
+        }
+      );
+
     }
   }
 
@@ -40,19 +60,22 @@ export class AuthService {
     );
   }
 
-  validaToken(token: string): Observable<any> {
+  validarToken(): Observable<any> {
     return this.http.post(
-      `${this.apiUrl}/valida/token?token=${token}`, ""
+      `${this.apiUrl}/auth/valida/token?token=${this.token}`, null
     );
   }
 
-
-
-
-  /*postLogin(json: any): Observable<any> {
-    return this.http.post<any>(
-      `${this.apiUrl}/auth/login`,
-      json, this.options
+  validaToken(): Observable<any> {
+    return this.http.get(
+      `${this.apiUrl}/auth/validar/token`
     );
-  }*/
+  }
+
+  postToken(json: string): Observable<any> {
+    return this.http.post(
+      `${this.apiUrl}/auth/login`, json, this.httpOptions
+    );
+  }
+
 }
