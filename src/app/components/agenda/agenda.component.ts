@@ -7,7 +7,7 @@ import { NgFor, NgIf } from '@angular/common';
   standalone: true,
   imports: [NgFor, NgIf],
   templateUrl: './agenda.component.html',
-  styleUrl: '../Portal/portal.component.scss'
+  styleUrl: './agenda.component.scss'
 })
 export class AgendaComponent {
   citas: any[] = [];
@@ -31,12 +31,7 @@ export class AgendaComponent {
             this.fecha = new Date(this.citas[this.i].fecha);
             this.citas[this.i].fechaSola = `${this.fecha.getFullYear()}-${this.fecha.getMonth() + 1}-${this.fecha.getDate()}`;
             this.citas[this.i].hora = `${this.fecha.getHours()}:${this.fecha.getMinutes()}:${this.fecha.getSeconds()}`;
-            console.log("sa")
           }
-          console.log("si");
-        } else {
-          console.log("no")
-
         }
       },
       (error) => {
@@ -63,12 +58,7 @@ export class AgendaComponent {
             this.fecha = new Date(this.citas[this.i].fecha);
             this.citas[this.i].fechaSola = `${this.fecha.getFullYear()}-${this.fecha.getMonth() + 1}-${this.fecha.getDate()}`;
             this.citas[this.i].hora = `${this.fecha.getHours()}:${this.fecha.getMinutes()}:${this.fecha.getSeconds()}`;
-            console.log("sa")
           }
-          console.log("si");
-        } else {
-          console.log("no")
-
         }
       },
       (error) => {

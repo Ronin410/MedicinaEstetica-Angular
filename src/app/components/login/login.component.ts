@@ -46,7 +46,6 @@ export class LoginComponent {
 
     this.authService.postLogin(jsonLogin).subscribe(
       (response) => {
-        console.log = response;
         if (response.meta.statusCode == 200) {
           if (response.data == "Credenciales invalidas") {
             this.isValidCredentials = false;

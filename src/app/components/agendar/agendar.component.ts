@@ -10,7 +10,7 @@ import { EmergentMessageComponent } from "../emergent-message/emergent-message.c
   selector: 'app-agendar',
   standalone: true,
   templateUrl: './agendar.component.html',
-  styleUrl: '../Portal/portal.component.scss',
+  styleUrl: './agendar.component.scss',
   imports: [RouterOutlet, RouterLink, NgIf, NgFor, EmergentMessageComponent]
 })
 export class AgendarComponent implements OnInit {
@@ -51,12 +51,17 @@ export class AgendarComponent implements OnInit {
       return
     }
 
+    if (this.totalPagar.value == 0) {
+      this.totalPagar.value = 500
+    }
+
     var json = {
       "idCita": this.id.value,
       "cliente": this.cliente.value,
       "doctora": this.doctora.value,
       "fecha": this.formattedDate,
-      "status": 0
+      "status": 0,
+      "total": this.totalPagar.value
     }
 
     var jsonConverter = JSON.stringify(json);
@@ -71,7 +76,6 @@ export class AgendarComponent implements OnInit {
           this.LimpiarCamposGuardados();
           this.ConsultarUltimo();
         } else {
-          console.log("no")
           this.noGuardado = true;
 
         }
@@ -116,7 +120,6 @@ export class AgendarComponent implements OnInit {
       this.formattedDate.setHours(this.nuevasHoras);
       this.formattedDate = this.formattedDate.toISOString();
 
-      console.log(this.formattedDate);
     }
   }
 
@@ -145,8 +148,7 @@ export class AgendarComponent implements OnInit {
     this.guardado = false;
     this.noGuardado = false;
     this.vacios = false;
-    this.totalPagar.value = 0;
-
+    this.totalPagar.value = 500;
     this.carrito = [];
   }
 
@@ -157,7 +159,7 @@ export class AgendarComponent implements OnInit {
     this.hora.value = "";
     this.minutos.value = ""
     this.doctora.value = ""
-    this.totalPagar.value = 0;
+    this.totalPagar.value = 500;
 
     this.noGuardado = false;
     this.vacios = false;
@@ -172,7 +174,6 @@ export class AgendarComponent implements OnInit {
     this.minutos = document.getElementById("Minutos") as HTMLInputElement;
     this.doctora = document.getElementById("Doctora") as HTMLInputElement;
     this.totalPagar = document.getElementById("Total") as HTMLInputElement;
-
   }
 
   ConsultarInventario() {
@@ -194,7 +195,7 @@ export class AgendarComponent implements OnInit {
   AgregarCarrito(id: any) {
     this.InicializarCampos();
     this.carrito.push(this.inventario[id - 1]);
-    this.totalPagar.value = 0;
+    this.totalPagar.value = 500;
     for (this.i = 0; this.i < this.carrito.length; this.i++) {
 
       this.totalPagar.value = Number(this.totalPagar.value) + Number(this.carrito[this.i].precio);
@@ -206,7 +207,7 @@ export class AgendarComponent implements OnInit {
     let arreglo = this.carrito;
     arreglo = arreglo.slice(0, id).concat(arreglo.slice(id + 1));
     this.carrito = arreglo;
-    this.totalPagar.value = 0;
+    this.totalPagar.value = 500;
     for (this.i = 0; this.i < this.carrito.length; this.i++) {
       this.totalPagar.value = Number(this.totalPagar.value) + Number(this.carrito[this.i].precio);
     }
@@ -239,7 +240,6 @@ export class AgendarComponent implements OnInit {
           if (response.meta.statusCode == 200) {
 
           } else {
-            console.log("no")
             this.noGuardado = true;
 
           }

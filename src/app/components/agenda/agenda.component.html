@@ -113,16 +113,16 @@
 
 
 
-    <!-- Invoice List Table -->
     <section class="">
         <!-- Table Header -->
         <div
-            class="invoice-table-row invoice-table-header bg-white mt-10 rounded-xl px-10  py-4 flex items-center gap-x-3 text-sm font-semibold  text-gray-600">
-            <div class="text-left">Id</div>
-            <div class="text-left">Cliente</div>
-            <div class="text-left">Doctora</div>
-            <div class="text-center ">Fecha</div>
-            <div class="text-center ">Hora</div>
+            class=" bg-white mt-10 rounded-xl px-10  py-4 flex items-center gap-x-3 text-sm font-semibold  text-gray-600">
+            <div class="flex-1 text-center">Id</div>
+            <div class="flex-1 text-center ">Cliente</div>
+            <div class="flex-1 text-center ">Doctora</div>
+            <div class="flex-1 text-center ">Fecha</div>
+            <div class="flex-1 text-center ">Hora</div>
+            <div class="flex-1 text-center ">Total</div>
             <div class="flex-1  text-center">Status</div>
         </div><!-- /Table Header -->
 
@@ -131,13 +131,14 @@
         <div class="bg-white mt-5 rounded-xl text-sm  text-gray-500 divide-y divide-indigo-50 overflow-x-auto  shadow"
             style="overflow-y: scroll; height: 500px;">
 
-            <div class="invoice-table-row flex items-center gap-x-3 px-10 py-4" *ngFor="let cita of citas">
-                <div class="text-left ">{{ cita.idCita }}</div>
-                <div class="text-left">{{ cita.cliente }}</div>
-                <div class="text-left">{{ cita.doctora }}</div>
-                <div class="text-center">{{ cita.fechaSola }}</div>
-                <div class="text-center">{{ cita.hora }}</div>
-                <div class="text-center ">
+            <div class=" flex items-center gap-x-3 px-10 py-4" *ngFor="let cita of citas">
+                <div class="flex-table text-center ">{{ cita.idCita }}</div>
+                <div class="flex-table text-center">{{ cita.cliente }}</div>
+                <div class=" flex-table text-center">{{ cita.doctora }}</div>
+                <div class="flex-table text-center">{{ cita.fechaSola }}</div>
+                <div class="flex-table text-center">{{ cita.hora }}</div>
+                <div class="flex-table text-center">${{ cita.total }}</div>
+                <div class="flex-table text-center ">
                     <span class="px-4 py-1 rounded-lg bg-rose-400  text-white" *ngIf="cita.status === 0">Pend</span>
                     <span class="px-4 py-1 rounded-lg bg-rose-400  text-white" *ngIf="cita.status === 1">Fin</span>
                 </div>
@@ -146,6 +147,7 @@
         </div><!-- /Table Body -->
 
     </section>
-    <!-- /Invoice List Table -->
+
+
 
 </main>

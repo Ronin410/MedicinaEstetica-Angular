@@ -7,10 +7,9 @@ import { NgFor, NgIf } from '@angular/common';
   standalone: true,
   imports: [NgFor, NgIf],
   templateUrl: './inicio.component.html',
-  styleUrl: '../Portal/portal.component.scss'
+  styleUrl: './inicio.component.scss'
 })
 export class InicioComponent {
-
   citasHoy: any[] = [];
   fecha: any;
   formattedDate: any;
@@ -34,12 +33,7 @@ export class InicioComponent {
             this.fecha = new Date(this.citasHoy[this.i].fecha);
             this.citasHoy[this.i].fechaSola = `${this.fecha.getFullYear()}-${this.fecha.getMonth() + 1}-${this.fecha.getDate()}`;
             this.citasHoy[this.i].hora = `${this.fecha.getHours()}:${this.fecha.getMinutes()}:${this.fecha.getSeconds()}`;
-            console.log("sa")
           }
-          console.log("si");
-        } else {
-          console.log("no")
-
         }
       },
       (error) => {

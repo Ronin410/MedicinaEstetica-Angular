@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './inventario.component.html',
-  styleUrl: '../Portal/portal.component.scss'
+  styleUrl: './inventario.component.scss'
 })
 export class InventarioComponent {
 

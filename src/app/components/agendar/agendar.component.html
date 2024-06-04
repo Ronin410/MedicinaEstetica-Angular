@@ -8,7 +8,7 @@
                 <label style="width: 80px; padding-top: 12px;">Total: $ </label>
                 <input
                     class="bg-indigo-800/80 text-white tracking-wider pl-4 pr-10 py-3 rounded-lg appearance-none w-full outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 "
-                    id="Total" name="total" type="text" placeholder="0" disabled>
+                    id="Total" name="total" type="text" placeholder="500" disabled>
 
 
             </div>
@@ -172,11 +172,11 @@
             <!-- Table Body -->
             <div class="bg-white mt-5 rounded-xl text-sm  text-gray-500 divide-y divide-indigo-50 overflow-x-auto  shadow"
                 style="overflow-y: scroll; height: 450px; width: 45%;">
-
-
                 <div class="invoice-table-row flex items-center gap-x-3 px-10 py-4"
                     *ngFor="let car of carrito ; let i = index">
-                    <button type="submit" (click)="EliminarCarrito(i)">-</button>
+                    <button type="submit" (click)="EliminarCarrito(i)">
+                        <h1>-</h1>
+                    </button>
                     <div class="text-left ">{{car.nomProc}}</div>
                     <div class="text-left ">{{car.precio}}</div>
                 </div>

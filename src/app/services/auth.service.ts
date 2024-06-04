@@ -24,7 +24,6 @@ export class AuthService {
 
       return this.validarToken().subscribe(
         (response) => {
-          console.log = response;
           if (response.meta.statusCode == 200) {
             if (response.data != true) {
               localStorage.setItem("tokenSesion", "");

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Consulta Médica</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Formulario de Registro Clínico</h1>
+        <div class="flex ">
+            <label for="nombre">Doctora:</label>
+            <label class="align" for="fecha_atencion">Fecha de atencion:</label>
+        </div>
+        <div class="flex">
+            <input type="text" id="nombre" name="nombre" value="Alin Yuritsi Zavala Olais" required>
+            <input type="date" id="fecha_atencion" name="fecha_atencion" class="type-date" required>
+        </div>
+        <div class="flex ">
+            <label for="nombre">Nombre completo:</label>
+            <label class="align" for="fecha_nacimiento">Fecha de nacimiento:</label>
+        </div>
+        <div class="flex">
+            <input type="text" id="nombre" name="nombre" required>
+            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+        </div>
+        <div *ngIf="paginaActual === 'paso1'">
+            <div>
+                <label for="antecedentes">Antecedentes:</label>
+                <textarea id="antecedentes" name="antecedentes" rows="4"></textarea>
+
+                <label for="resumen">Resumen:</label>
+                <textarea id="resumen" name="resumen" rows="4"></textarea>
+
+                <label for="tratamiento">Tratamiento:</label>
+                <textarea id="tratamiento" name="tratamiento" rows="3"></textarea>
+
+                <label for="observaciones">Observaciones:</label>
+                <textarea id="observaciones" name="observaciones" rows="5"></textarea>
+            </div>
+
+            <button class="hidden sm:inline-block" (click)="abrirCarrito()">Siguiente</button>
+            <button class="hidden sm:inline-block px-4">Guardar</button>
+
+        </div>
+
+    </div>
+
+    <div *ngIf="paginaActual === 'paso2'">
+        <app-carrito></app-carrito>
+    </div>
+</body>
+
+
+</html>

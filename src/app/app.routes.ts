@@ -9,6 +9,7 @@ import { InventarioComponent } from './components/inventario/inventario.componen
 import { ConfiguracionComponent } from './components/configuracion/configuracion.component';
 import { loginGuard } from './guards/login.guard';
 import { InicioComponent } from './components/Inicio/inicio.component';
+import { HojaclinicaComponent } from './components/hojaclinica/hojaclinica.component';
 
 export const routes: Routes = [
     {
@@ -47,6 +48,11 @@ export const routes: Routes = [
                 path: 'configuracion',
                 title: 'Configuracion',
                 component: ConfiguracionComponent,
+            },
+            {
+                path: 'hojaclinica',
+                title: 'Hoja Clinica',
+                component: HojaclinicaComponent,
             }
         ]
     },

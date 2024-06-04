@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Consulta Médica</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Tratamientos</h2>
+        <section style="display:flex;flex-wrap: nowrap;align-items: center;justify-content: space-around;">
+            <!-- Table Body -->
+            <div class="bg-white mt-5 rounded-xl text-sm  text-gray-500 divide-y divide-indigo-50 overflow-x-auto  shadow"
+                style="overflow-y: scroll; height: 450px; width: 45%;">
+
+                <div class="invoice-table-row flex items-center gap-x-3 px-10 py-4"
+                    *ngFor="let inv of inventario ; let i = index">
+                    <!-- <button type="submit" (click)="AgregarCarrito(inventario[i].idProc)">+</button>-->
+                    <div class="text-left">{{inv.nomProc}}</div>
+                    <div class="text-left">${{inv.precio}}</div>
+                </div>
+
+            </div><!-- /Table Body -->
+
+
+            <!-- Table Body -->
+            <div class="bg-white mt-5 rounded-xl text-sm  text-gray-500 divide-y divide-indigo-50 overflow-x-auto  shadow"
+                style="overflow-y: scroll; height: 450px; width: 45%;">
+                <div class="invoice-table-row flex items-center gap-x-3 px-10 py-4"
+                    *ngFor="let car of carrito ; let i = index">
+                    <!--<button type="submit" (click)="EliminarCarrito(i)">
+                    <h1>-</h1>
+                    </button>-->
+                    <div class="text-left ">{{car.nomProc}}</div>
+                    <div class="text-left ">{{car.precio}}</div>
+                </div>
+            </div>
+
+
+
+        </section>
+
+        <button class="hidden sm:inline-block" (click)="regresar()">Regresar</button>
+
+    </div>
+</body>
+
+
+</html>
