@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { InicioService } from '../../services/inicio.service'
 import { NgFor, NgIf } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-inicio',
@@ -14,7 +15,7 @@ export class InicioComponent {
   fecha: any;
   formattedDate: any;
   i = 0;
-  constructor(private inicioService: InicioService) {
+  constructor(private inicioService: InicioService, private router: Router) {
     this.CitasFechaActual();
   }
 
@@ -41,5 +42,10 @@ export class InicioComponent {
       }
     );
 
+  }
+
+  atenderCita(cita: any) {
+    //this.router.navigateByUrl('/hojaclinica', { state: { cita } });
+    this.router.navigate(['/hojaclinica/', cita.idCita]);
   }
 }

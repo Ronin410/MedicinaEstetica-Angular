@@ -11,47 +11,90 @@
 
     <div class="container">
         <h1>Formulario de Registro Clínico</h1>
+        <div class="inline-flex relative">
+            <label style="width: 80px; padding-top: 12px;">Total: $ </label>
+            <input
+                class="bg-indigo-800/80 text-white tracking-wider pl-4 pr-10 py-3 rounded-lg appearance-none w-full outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 "
+                id="Total" name="total" type="text" placeholder="500" disabled>
+
+
+        </div>
         <div class="flex ">
-            <label for="nombre">Doctora:</label>
+            <label for="doctora">Doctora:</label>
             <label class="align" for="fecha_atencion">Fecha de atencion:</label>
         </div>
         <div class="flex">
-            <input type="text" id="nombre" name="nombre" value="Alin Yuritsi Zavala Olais" required>
+            <input type="text" id="doctora" name="doctora" value="Alin Yuritsi Zavala Olais" required>
             <input type="date" id="fecha_atencion" name="fecha_atencion" class="type-date" required>
         </div>
         <div class="flex ">
-            <label for="nombre">Nombre completo:</label>
+            <label for="nombreCliente">Nombre completo:</label>
             <label class="align" for="fecha_nacimiento">Fecha de nacimiento:</label>
         </div>
         <div class="flex">
-            <input type="text" id="nombre" name="nombre" required>
+            <input type="text" id="nombreCliente" name="nombreCliente" required>
             <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
         </div>
         <div *ngIf="paginaActual === 'paso1'">
             <div>
                 <label for="antecedentes">Antecedentes:</label>
-                <textarea id="antecedentes" name="antecedentes" rows="4"></textarea>
+                <textarea id="antecedentes" name="antecedentes" rows="4" value="{{this.antecedentesInfo}}"></textarea>
 
                 <label for="resumen">Resumen:</label>
-                <textarea id="resumen" name="resumen" rows="4"></textarea>
+                <textarea id="resumen" name="resumen" rows="4" value="{{this.resumenInfo}}"></textarea>
 
                 <label for="tratamiento">Tratamiento:</label>
-                <textarea id="tratamiento" name="tratamiento" rows="3"></textarea>
+                <textarea id="tratamiento" name="tratamiento" rows="3" value="{{this.tratamientoInfo}}"></textarea>
 
                 <label for="observaciones">Observaciones:</label>
-                <textarea id="observaciones" name="observaciones" rows="5"></textarea>
+                <textarea id="observaciones" name="observaciones" rows="5"
+                    value="{{this.observacionesInfo}}"></textarea>
             </div>
 
-            <button class="hidden sm:inline-block" (click)="abrirCarrito()">Siguiente</button>
-            <button class="hidden sm:inline-block px-4">Guardar</button>
+            <button class="hidden sm:inline-block" (click)="abrirCarrito()">Carrito</button>
+            <button class="hidden sm:inline-block px-4" (click)="AgregarHojaClinica()">Guardar</button>
 
         </div>
 
     </div>
 
     <div *ngIf="paginaActual === 'paso2'">
-        <app-carrito></app-carrito>
+        <!-- <app-carrito></app-carrito>-->
+        <div class="container">
+            <h2>Tratamientos</h2>
+
+
+            <!-- aqui es la nueva tabla que se estata  -->
+            <section class="">
+
+                <table>
+
+                    <tr>
+                        <th>Nombre Procedimiento</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                    </tr>
+
+                    <tr *ngFor="let inv of inventario; let i = index">
+                        <td>{{ inv.nomProc }}</td>
+                        <td>{{ inv.precio }}</td>
+                        <td>
+                            <button class="hidden sm:inline-block" (click)="restar(i)">-</button>
+                            <input type="text" class="cantidad" id="cantidad{{i}}" maxlength="9"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                value="{{this.carrito[i]}}" (keyup)="calcularTotal()">
+                            <button class="hidden sm:inline-block" (click)="sumar(i)">+</button>
+                        </td>
+                    </tr>
+                </table>
+
+                <button class="hidden sm:inline-block" (click)="regresar()">Regresar</button>
+
+
+            </section>
+        </div>
     </div>
+
 </body>
 
 

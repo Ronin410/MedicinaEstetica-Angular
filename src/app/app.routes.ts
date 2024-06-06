@@ -50,7 +50,7 @@ export const routes: Routes = [
                 component: ConfiguracionComponent,
             },
             {
-                path: 'hojaclinica',
+                path: 'hojaclinica/:id',
                 title: 'Hoja Clinica',
                 component: HojaclinicaComponent,
             }

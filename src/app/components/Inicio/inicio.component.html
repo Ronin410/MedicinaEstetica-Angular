@@ -59,19 +59,19 @@
         <div class="bg-white mt-5 rounded-xl text-sm  text-gray-500 divide-y divide-indigo-50 overflow-x-auto  shadow"
             style="overflow-y: scroll; height: 500px;">
 
-            <div class="" *ngFor="let cita of citasHoy">
-                <a class="flex items-center gap-x-3 px-10 py-4 " href="hojaclinica">
-                    <div class="flex-table text-center ">{{ cita.idCita }}</div>
-                    <div class="flex-table text-center">{{ cita.cliente }}</div>
-                    <div class=" flex-table text-center">{{ cita.doctora }}</div>
-                    <div class="flex-table text-center">{{ cita.fechaSola }}</div>
-                    <div class="flex-table text-center">{{ cita.hora }}</div>
-                    <div class="flex-table text-center">${{ cita.total }}</div>
-                    <div class="flex-table text-center ">
-                        <span class="px-4 py-1 rounded-lg bg-rose-400  text-white" *ngIf="cita.status === 0">Pend</span>
-                        <span class="px-4 py-1 rounded-lg bg-rose-400  text-white" *ngIf="cita.status === 1">Fin</span>
-                    </div>
-                </a>
+            <div class="flex items-center gap-x-3 px-10 py-4" *ngFor="let cita of citasHoy" (click)="atenderCita(cita)">
+                <!-- <a class="flex items-center gap-x-3 px-10 py-4 " href="hojaclinica"> -->
+                <div class="flex-table text-center ">{{ cita.idCita }}</div>
+                <div class="flex-table text-center">{{ cita.cliente }}</div>
+                <div class=" flex-table text-center">{{ cita.doctora }}</div>
+                <div class="flex-table text-center">{{ cita.fechaSola }}</div>
+                <div class="flex-table text-center">{{ cita.hora }}</div>
+                <div class="flex-table text-center">${{ cita.total }}</div>
+                <div class="flex-table text-center ">
+                    <span class="px-4 py-1 rounded-lg bg-rose-400  text-white" *ngIf="cita.status === 0">Pend</span>
+                    <span class="px-4 py-1 rounded-lg bg-rose-400  text-white" *ngIf="cita.status === 1">Fin</span>
+                </div>
+                <!-- s </a> -->
 
             </div>
 
