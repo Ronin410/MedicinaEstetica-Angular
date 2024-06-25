@@ -5,6 +5,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HojaclinicaService } from '../../services/hojaclinica.service';
 import { InventarioService } from '../../services/inventario.service';
 import { AgendarService } from '../../services/agendar.service';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import FileSaver, { saveAs } from 'file-saver'; // Install file-saver library using npm or yarn
+
+
+//import { PdfMake } from 'pdf-make/build/pdfmake';
+//import { PdfFonts } from 'pdfmake/build/vfs_fonts';
+//import * as pdfMake from 'pdf-make/build/pdfmake';
+
+//PdfMake.vfs = PdfFonts.pdfMake.vfs;
+
 
 @Component({
   selector: 'app-hojaclinica',
@@ -18,6 +29,7 @@ export class HojaclinicaComponent {
   mostrarCarrito = false;
   @ViewChild('myCarrito') dialog!: ElementRef;
   public paginaActual: string = 'paso1';
+  @ViewChild('datos') datos!: ElementRef;
 
   idCita: any;
   cliente: any;
@@ -38,6 +50,7 @@ export class HojaclinicaComponent {
   carrito: any[] = [];
   jsonCarrito: any[] = [];
   totalPagar: any;
+  inventarioArray : any[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -60,6 +73,8 @@ export class HojaclinicaComponent {
   }
 
   abrirCarrito() {
+    //this.generatePDF();
+    this.downloadPdf();
     this.paginaActual = 'paso2';
 
     this.antecedentes = document.getElementById("antecedentes") as HTMLInputElement;
@@ -136,9 +151,7 @@ export class HojaclinicaComponent {
     this.hojaClinicaService.AgregarHojaClinica(jsonConverter).subscribe(
       (response) => {
         if (response.meta.statusCode == 200) {
-          console.log("efw");
           this.guardarCarrito();
-          this.ConsultarInventario();
         }
       },
       (error) => {
@@ -204,8 +217,23 @@ export class HojaclinicaComponent {
     this.inventarioService.ConsultarInventario().subscribe(
       (response) => {
         if (response.meta.statusCode == 200) {
-          this.inventario = response.data;
-          this.carrito = new Array(this.inventario.length);
+          if(response.data != null){
+            //this.inventario = response.data;
+
+            this.inventarioArray = response.data;
+
+            this.inventario = this.inventarioArray.sort((a, b) => {
+              if (a.idProc < b.idProc) {
+                return -1;
+              } else if (a.idProc > b.idProc) {
+                return 1;
+              } else {
+                return 0;
+              }
+            });
+            this.carrito = new Array(this.inventario.length);
+          }
+
         }
       },
       (error) => {
@@ -216,9 +244,11 @@ export class HojaclinicaComponent {
 
   guardarCarrito() {
     var json;
+    var contador = 0;
     for (let i = 0; i < this.carrito.length; i++) {
 
       if (this.carrito[i] != null) {
+        contador++;
         json = {
           "idCita": this.idCita,
           "numProd": this.inventario[i].idProc,
@@ -231,14 +261,27 @@ export class HojaclinicaComponent {
       }
 
     }
-    var jsonConverter = JSON.stringify(this.jsonCarrito);
+
+    if (contador == 0) {
+      json = {
+        "idCita": this.idCita,
+        "numProd": 0,
+        "nomProd": "",
+        "precio": 0,
+        "cantidad": 0
+      }
+
+      var jsonConverter = JSON.stringify(json);
+    } else {
+      var jsonConverter = JSON.stringify(this.jsonCarrito);
+    }
+
 
     this.agendarService.AgregarDetalleCita(jsonConverter).subscribe(
       (response) => {
         if (response.meta.statusCode == 200) {
           console.log(response.data);
           console.log(this.carrito[0]);
-          this.jsonCarrito = [];
         }
       },
       (error) => {
@@ -246,4 +289,38 @@ export class HojaclinicaComponent {
       }
     );
   }
-}
+
+    generatePDF() {
+      html2canvas(this.datos.nativeElement).then(canvas => {
+        const doc = new jsPDF();
+        const imgData = canvas.toDataURL('image/png');
+        doc.addImage(imgData, 'JPEG', 0, 0, 210, 297); // Adjust dimensions as needed
+        doc.save('medical_history.pdf'); // Replace with desired filename
+      });
+    }
+
+      downloadPdf() {
+        this.hojaClinicaService.downloadPdf(1).subscribe(
+          (response) => {
+            if (response.meta.statusCode === 200) {
+              const decodedData = atob(response.data);
+              const byteArray = new Uint8Array(decodedData.length);
+              for (let i = 0; i < decodedData.length; i++) {
+                byteArray[i] = decodedData.charCodeAt(i);
+              }
+              const blob = new Blob([byteArray], { type: 'application/pdf' });
+
+              const pdfURL = URL.createObjectURL(blob);
+              const link = document.createElement('a');
+              link.href = pdfURL;
+              link.download = 'mi-archivo.pdf';
+              link.click();
+            }
+
+          },
+          (error) => {
+            console.error('Error al obtener datos del empleado:', error);
+          }
+        );
+      }
+  }

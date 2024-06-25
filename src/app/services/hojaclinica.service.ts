@@ -25,4 +25,13 @@ export class HojaclinicaService {
       `${this.apiUrl}/hojaclinica/agregar`, json, this.httpOptions
     );
   }
+
+  downloadPdf(id: any): Observable<any> {
+    return this.http.get(
+      `${this.apiUrl}/hojaclinica/generar-pdf?id=${id}`, this.httpOptions
+    );
+  }
+
+ 
 }
+
